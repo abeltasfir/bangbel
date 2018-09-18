@@ -4,6 +4,15 @@
   box-sizing: border-box;
 }
 
+body {
+  min-height: 100vh;
+  overflow: hidden;
+  background-color: #313636;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 svg {
   margin-bottom: 80px;
 }
@@ -14,10 +23,7 @@ svg {
 }
 
 .text {
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  user-select: none;
   -webkit-font-smoothing: subpixel-antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -27,16 +33,10 @@ svg {
 }
 
 .strokeW {
-  -webkit-animation: strokeW .6s forwards;
-          animation: strokeW .6s forwards;
-}
-@-webkit-keyframes strokeW {
-  to {
-    stroke-width: 1.16;
-  }
-}
-@keyframes strokeW {
-  to {
-    stroke-width: 1.16;
+  animation: strokeW .6s forwards;
+  @keyframes strokeW {
+    to {
+      stroke-width: 1.16;
+    }
   }
 }
