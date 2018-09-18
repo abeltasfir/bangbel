@@ -1,131 +1,82 @@
-(function() {
+var tl = void 0,downloading = false,points = [],
+btn = document.querySelector('.btn'),
+dot = document.querySelector('.dot'),
+text = document.querySelector('.text'),
+mainCirc = document.querySelector('.mainCircle'),
+subCirc = document.querySelector('.subCircle'),
+mainCircFill = document.querySelector('.mainCircleFill'),
+arrow = document.querySelector('.arrow'),
+rect = document.querySelector('.rect');
 
-    // Some variables to use later
-    var buttonContainer = document.querySelector('.download-button-container');
-    var button = buttonContainer.querySelector('.download-button');
-    var ball = buttonContainer.querySelector('.button-ball');
-    var circularProgress = buttonContainer.querySelector('.button-circular-progress');
-    var circularProgressLength = circularProgress.getTotalLength();
-    var linearProgress = buttonContainer.querySelector('.button-linear-progress-bar');
-    var borderPath = buttonContainer.querySelector('.border-path');
-    var iconSquarePath = buttonContainer.querySelector('.button-icon-path-square');
-    var iconLinePath = buttonContainer.querySelector('.button-icon-path-line');
-    var circularProgressBar = new Segment(circularProgress, 0, 0);
-    var iconSquare = new Segment(iconSquarePath, '30%', '70%');
-    var iconLine = new Segment(iconLinePath, 0, '100%');
-    var downloading = false;
-    var completed = false;
-    var progressTimer = 0;
+TweenLite.set(rect, { transformOrigin: '50% 50%', rotation: 45 });
 
-    // Capture click events
-    button.addEventListener('click', function () {
-        if (!completed) { // Don't do anything if downloading has been completed
-            if (downloading) { // If it's downloading, stop the download
-                stopDownload();
-            } else { // Start the download
-                startDownload();
-            }
-        }
-    });
+btn.addEventListener('click', animation);
 
-    // Start the download
-    function startDownload() {
-        // Update variables and CSS classes
-        downloading = true;
-        buttonContainer.classList.add('downloading');
-        animateIcon();
-        // Update progress after 1s
-        progressTimer = setTimeout(function () {
-            buttonContainer.classList.add('progressing');
-            animateProgress();
-        }, 1000);
+function animation() {
+  if (downloading) return;
+  downloading = !downloading;
+  var downloadTime = Math.random() * .5 + .7;
+  tl = new TimelineLite({ onComplete: restart });
+  tl.restart().play().
+  to(arrow, .35, { y: 2.5, ease: CustomEase.create('custom', 'M0,0,C0.042,0.14,0.374,1,0.5,1,0.64,1,0.964,0.11,1,0') }, 'click').
+  to(text, .3, { svgOrigin: '55% 35%', scale: .77, ease: CustomEase.create('custom', 'M0,0,C0.042,0.14,0.374,1,0.5,1,0.64,1,0.964,0.11,1,0') }, 'click+=.05').
+  set(subCirc, { fillOpacity: 1, strokeOpacity: 1 }, 'squeeze-=.3').
+  to(subCirc, .35, { fillOpacity: 0, ease: Power1.easeInOut }, 'squeeze-=.3').
+  to(subCirc, .45, { attr: { r: 13 }, strokeOpacity: 0, className: '+=strokeW', ease: Power0.easeNone }, 'squeeze-=.3').
+  to(btn, .7, { attr: { d: 'M50,25 h0 a10,10 0 0,1 10,10 a10,10 0 0,1 -10,10 s0,0 0,0  a10,10 0 0,1 -10,-10 a10,10 0 0,1 10,-10 h0' }, ease: Sine.easeOut }, 'squeeze').
+  to([mainCirc, mainCircFill, rect, arrow], .7, { x: 30, ease: Sine.easeOut }, 'squeeze').
+  to(rect, .7, { fill: '#fff', rotation: 270, ease: Sine.easeOut }, 'squeeze').
+  to(text, .3, { autoAlpha: 0, y: 7, onComplete: changeText }, 'squeeze').
+  to(arrow, .7, { attr: { d: 'M20,39 l3.5,-3.5 l-3.5,-3.5 M20,39 l-3.5,-3.5 l3.5,-3.5 M20,39 l0,0' }, transformOrigin: '50% 50%', rotation: 225, ease: Sine.easeOut }, 'squeeze').
+  to(dot, .4, { attr: { r: 1.5 }, ease: Back.easeOut.config(7) }).
+  set(subCirc, { drawSVG: 0, strokeOpacity: 1, transformOrigin: '50% 50%', x: 30, rotation: -90, attr: { r: 9.07 } }).
+  to(subCirc, downloadTime, { drawSVG: '102%', ease: Power2.easeIn }, 'fill+=.02').
+  to(dot, downloadTime, { bezier: { type: 'cubic', values: points }, attr: { r: 2.7 }, ease: Power2.easeIn }, 'fill').
+  to('.gradient', downloadTime, { attr: { offset: '0%' }, ease: Power2.easeIn }, 'fill').
+  to(dot, .44, { fill: '#02fc86', y: -22, ease: Power1.easeOut }, 'stretch-=.01').
+  to(dot, .27, { transformOrigin: '50% 50%', scaleX: .5, ease: SlowMo.ease.config(0.1, 2, true) }, 'stretch+=.04').
+  to(dot, .3, { scaleY: .6, ease: SlowMo.ease.config(0.1, 2, true) }, 'stretch+=.31').
+  to(dot, .44, { scaleX: .4, y: 22, ease: Power2.easeIn }, 'stretch+=.45').
+  to([mainCirc, subCirc, arrow, rect, mainCircFill], .33, { opacity: 0, ease: Power2.easeOut }, 'stretch+=.2').
+  to(btn, .4, { attr: { d: 'M50,25 h20 a10,10 0 0,1 10,10 a10,10 0 0,1 -10,10 s-20,0 -40,0 a10,10 0 0,1 -10,-10 a10,10 0 0,1 10,-10 h20' }, ease: Power1.easeOut }, 'stretch+=.2').
+  set(dot, { opacity: 0 }, 'stretch+=.875').
+  to(btn, .01, { stroke: '#02fc86', ease: Power2.easeIn }, 'stretch+=.87').
+  to(btn, .3, { attr: { d: 'M50,25 h20 a10,10 0 0,1 10,10 a12,12 0 0,1 -10,10.5 s-20,6 -40,0 a12,12 0 0,1 -10,-10.5 a10,10 0 0,1 10,-10 h20' },
+    ease: CustomEase.create('custom', 'M0,0 C0.046,0.062 0.018,1 0.286,1 0.532,1 0.489,-0.206 0.734,-0.206 0.784,-0.206 0.832,-0.174 1,0') }, 'stretch+=.869').
+  to(text, .45, { autoAlpha: 1, y: 0, ease: Back.easeOut.config(2.5) }, 'stretch+=.855');
+};
+
+function restart() {
+  setTimeout(function () {
+    tl.seek(0).pause();
+    text.textContent = 'download';
+    TweenLite.set(text, { x: 0 });
+    downloading = false;
+  }, 2000);
+};
+
+function changeText() {
+  text.textContent = 'open';
+  TweenLite.set(text, { x: -5 });
+};
+
+(function () {
+  var data = Snap.path.toCubic('M0,0 a9,9 0 0,1 0,18 a9,9 0 0,1 0,-18'),
+  dataLen = data.length;
+  for (var i = 0; i < dataLen; i++) {
+    var seg = data[i];
+    if (seg[0] === 'M') {
+      var point = {};
+      point.x = seg[1];
+      point.y = seg[2];
+      points.push(point);
+    } else {
+      for (var _i = 1; _i < 6; _i += 2) {
+        var _point = {};
+        _point.x = seg[_i];
+        _point.y = seg[_i + 1];
+        points.push(_point);
+      }
     }
-
-    // Stop the download
-    function stopDownload() {
-        // Update variables and CSS classes
-        downloading = false;
-        clearTimeout(progressTimer);
-        buttonContainer.classList.remove('downloading');
-        buttonContainer.classList.remove('progressing');
-        // Stop progress and draw icons back to initial state
-        stopProgress();
-        iconLine.draw(0, '100%', 1, {easing: anime.easings['easeOutCubic']});
-        iconSquare.draw('30%', '70%', 1, {easing: anime.easings['easeOutQuad']});
-    }
-
-    function animateIcon() {
-        iconLine.draw(0, 0, 0.5);
-        iconSquare.draw(0, '100%', 1);
-    }
-
-    function stopProgress() {
-        circularProgressBar.stop();
-        circularProgressBar.draw(0, 0, 0);
-        updateProgress(circularProgressBar, true);
-    }
-
-    // Update the circular and linear progress bars
-    function updateProgress(instance, keepBallPosition) {
-        if (!keepBallPosition) {
-            var point = instance.path.getPointAtLength(instance.end);
-            ball.style.transform = 'translate(' + point.x + 'px, ' + point.y + 'px)';
-        }
-        linearProgress.style.transform = 'translateY(-'+ instance.end * 100 / circularProgressLength +'%)';
-    }
-
-    // Progress animation
-    function animateProgress() {
-        // Fake progress animation from 0 to 100%
-        // This should be replaced with real progress data (real progress percent instead '100%'), and maybe called multiple times
-        circularProgressBar.draw(0, '100%', 2.5, {easing: anime.easings['easeInQuart'], update: updateProgress, callback: completedAnimation});
-
-        // // Another example to see a different fake progress (uncomment this and comment line above)
-        // circularProgressBar.draw(0, '40%', 1.5, {easing: anime.easings['easeInOutCubic'], update: updateProgress, callback: function () {
-        //     circularProgressBar.draw(0, '60%', 1, {easing: anime.easings['easeInOutCubic'], update: updateProgress, callback: function () {
-        //         circularProgressBar.draw(0, '100%', 1, {delay: 0.3, easing: anime.easings.easeCircleIn, update: updateProgress, callback: completedAnimation});
-        //     }});
-        // }});
-    }
-
-    // Animation performed when download has been completed
-    function completedAnimation() {
-        // Update variables and CSS classes
-        completed = true;
-        buttonContainer.classList.add('completed');
-        // Wait 1s for the ball animation
-        setTimeout(function () {
-            button.classList.add('button-hidden');
-            ball.classList.add('hidden');
-            borderPath.classList.remove('hidden');
-            // Morphing the path to the second shape
-            var morph = anime({
-                targets: borderPath,
-                d: 'M 40 3.5 a 36.5 36.5 0 0 0 -36.5 36.5 a 36.5 36.5 0 0 0 10.5 26.5 C 35 86.5 90 91.5 120 91.5 S 205 86.5 226 66.5 a 36.5 36.5 0 0 0 10.5 -26.5 a 36.5 36.5 0 0 0 -36.5 -36.5 Z',
-                duration: 100,
-                easing: 'linear',
-                complete: function () {
-                    // Morphing the path back to the original shape with elasticity
-                    morph = anime({
-                        targets: borderPath,
-                        d: 'M 40 3.5 a 36.5 36.5 0 0 0 -36.5 36.5 a 36.5 36.5 0 0 0 36.5 36.5 C 70 76.5 90 76.5 120 76.5 S 170 76.5 200 76.5 a 36.5 36.5 0 0 0 36.5 -36.5 a 36.5 36.5 0 0 0 -36.5 -36.5 Z',
-                        duration: 1000,
-                        elasticity: 600,
-                        complete: function () {
-                            // Update variables and CSS classes, and return the button to the original state
-                            completed = false;
-                            setTimeout(function () {
-                                buttonContainer.classList.remove('completed');
-                                button.classList.remove('button-hidden');
-                                ball.classList.remove('hidden');
-                                borderPath.classList.add('hidden');
-                                stopDownload();
-                            }, 500);
-                        }
-                    });
-                }
-            });
-        }, 1000);
-    }
-
+  }
 })();
