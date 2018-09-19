@@ -1,4 +1,4 @@
-﻿@import url(https://fonts.googleapis.com/css?family=Nunito:400,700,300);
+@import url(https://fonts.googleapis.com/css?family=Nunito:400,700,300);
 * {
   box-sizing: border-box;
   -webkit-touch-callout: none;
@@ -8,19 +8,7 @@
   -ms-user-select: none;
   user-select: none;
 }
-body {
-  font-family: 'Nunito', sans-serif;
-  background: #2c363f;
-}
-body .container {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 660px;
-  margin: auto;
-}
+
 body .container a.download, body .container a.follow {
   text-align: center;
   margin-top: 80px;
