@@ -9,7 +9,16 @@
   user-select: none;
 }
 
-body .containers a.download, body .containers a.follow {
+body .containerr {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 660px;
+  margin: auto;
+}
+body .containerr a.download, body .containerr a.follow {
   text-align: center;
   margin-top: 80px;
   width: 300px;
@@ -24,35 +33,35 @@ body .containers a.download, body .containers a.follow {
   border-radius: 4px;
   margin-right: 12px;
 }
-body .containers a.download i, body .containers a.follow i {
+body .containerr a.download i, body .containerr a.follow i {
   margin-right: 10px;
 }
-body .containers a.follow {
+body .containerr a.follow {
   float: left;
   padding: 14px 30px;
   background: none;
   color: white;
   border: 2px solid white;
 }
-body .containers a.follow:hover {
+body .containerr a.follow:hover {
   color: #41efb6;
   border-color: #41efb6;
 }
-body .containers a {
+body .containerr a {
   color: #28ecc3;
 }
-body .containers h1 {
+body .containerr h1 {
   color: white;
   text-align: center;
   margin: 0;
 }
-body .containers h2 {
+body .containerr h2 {
   margin: 10px 0px 80px 0px;
   color: white;
   font-size: 14px;
   text-align: center;
 }
-body .containers_button {
+body .containerr_button {
   border: 2px solid #28ecc3;
   width: 200px;
   text-align: center;
@@ -69,17 +78,17 @@ body .containers_button {
   font-weight: 700;
   font-size: 14px;
 }
-body .containers_button:hover {
+body .containerr_button:hover {
   box-shadow: 0px 0px 0px 6px rgba(0, 0, 0, 0.2);
   background: #28ecc3;
 }
-body .containers_button:hover span i {
+body .containerr_button:hover span i {
   margin-right: 10px;
 }
-body .containers_button:active {
+body .containerr_button:active {
   box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.2);
 }
-body .containers_button__bar {
+body .containerr_button__bar {
   width: 0%;
   position: absolute;
   height: 8px;
@@ -87,147 +96,147 @@ body .containers_button__bar {
   border-radius: 100px;
   background: -webkit-linear-gradient(left, #28ecc3 0%, #0bc9a1 100%);
 }
-body .containers input {
+body .containerr input {
   display: none;
 }
-body .containers input:checked + label .containers_button span span {
+body .containerr input:checked + label .containerr_button span span {
   opacity: 0;
   left: 40px;
 }
-body .containers input:checked + label .containers_button span i {
+body .containerr input:checked + label .containerr_button span i {
   opacity: 0;
   left: -40px;
 }
-body .containers input:checked + label .containers_button {
+body .containerr input:checked + label .containerr_button {
   animation: base 0.96s 0.12s cubic-bezier(0.755, -0.245, 0.175, 1) forwards, pulse 0.5s forwards, final 0.3s 3.6s forwards;
 }
-body .containers input:checked + label .containers_button .downloading {
+body .containerr input:checked + label .containerr_button .downloading {
   animation: pop 0.2s 1s forwards, popout 0.2s 3.4s forwards;
 }
-body .containers input:checked + label .containers_button .d_icon {
+body .containerr input:checked + label .containerr_button .d_icon {
   animation: d_icon 0.6s 1s forwards, wobble 0.4s 3.58s forwards, iconout 0.14s 4.45s forwards;
 }
-body .containers input:checked + label .containers_button .complete {
+body .containerr input:checked + label .containerr_button .complete {
   animation: d_icon 0.14s 4.55s forwards;
 }
-body .containers input:checked + label .containers_button .point:nth-of-type(1) {
+body .containerr input:checked + label .containerr_button .point:nth-of-type(1) {
   animation: dot 0.14s 4.00385s forwards;
 }
-body .containers input:checked + label .containers_button .point:nth-of-type(2) {
+body .containerr input:checked + label .containerr_button .point:nth-of-type(2) {
   animation: dot 0.14s 4.00769s forwards;
 }
-body .containers input:checked + label .containers_button .point:nth-of-type(3) {
+body .containerr input:checked + label .containerr_button .point:nth-of-type(3) {
   animation: dot 0.14s 4.01154s forwards;
 }
-body .containers input:checked + label .containers_button .point:nth-of-type(4) {
+body .containerr input:checked + label .containerr_button .point:nth-of-type(4) {
   animation: dot 0.14s 4.01538s forwards;
 }
-body .containers input:checked + label .containers_button .point:nth-of-type(5) {
+body .containerr input:checked + label .containerr_button .point:nth-of-type(5) {
   animation: dot 0.14s 4.01923s forwards;
 }
-body .containers input:checked + label .containers_button .point:nth-of-type(6) {
+body .containerr input:checked + label .containerr_button .point:nth-of-type(6) {
   animation: dot 0.14s 4.02308s forwards;
 }
-body .containers input:checked + label .containers_button .point:nth-of-type(7) {
+body .containerr input:checked + label .containerr_button .point:nth-of-type(7) {
   animation: dot 0.14s 4.02692s forwards;
 }
-body .containers input:checked + label .containers_button .point:nth-of-type(8) {
+body .containerr input:checked + label .containerr_button .point:nth-of-type(8) {
   animation: dot 0.14s 4.03077s forwards;
 }
-body .containers input:checked + label .containers_button .point:nth-of-type(9) {
+body .containerr input:checked + label .containerr_button .point:nth-of-type(9) {
   animation: dot 0.14s 4.03462s forwards;
 }
-body .containers input:checked + label .containers_button .point:nth-of-type(10) {
+body .containerr input:checked + label .containerr_button .point:nth-of-type(10) {
   animation: dot 0.14s 4.03846s forwards;
 }
-body .containers input:checked + label .containers_button .point:nth-of-type(11) {
+body .containerr input:checked + label .containerr_button .point:nth-of-type(11) {
   animation: dot 0.14s 4.04231s forwards;
 }
-body .containers input:checked + label .containers_button .point:nth-of-type(12) {
+body .containerr input:checked + label .containerr_button .point:nth-of-type(12) {
   animation: dot 0.14s 4.04615s forwards;
 }
-body .containers input:checked + label .containers_button .point:nth-of-type(13) {
+body .containerr input:checked + label .containerr_button .point:nth-of-type(13) {
   animation: dot 0.14s 4.05s forwards;
 }
-body .containers input:checked + label .containers_button .point:nth-of-type(14) {
+body .containerr input:checked + label .containerr_button .point:nth-of-type(14) {
   animation: dot 0.14s 4.05385s forwards;
 }
-body .containers input:checked + label .containers_button .point:nth-of-type(15) {
+body .containerr input:checked + label .containerr_button .point:nth-of-type(15) {
   animation: dot 0.14s 4.05769s forwards;
 }
-body .containers input:checked + label .containers_button .point:nth-of-type(16) {
+body .containerr input:checked + label .containerr_button .point:nth-of-type(16) {
   animation: dot 0.14s 4.06154s forwards;
 }
-body .containers input:checked + label .containers_button .point:nth-of-type(17) {
+body .containerr input:checked + label .containerr_button .point:nth-of-type(17) {
   animation: dot 0.14s 4.06538s forwards;
 }
-body .containers input:checked + label .containers_button .point:nth-of-type(18) {
+body .containerr input:checked + label .containerr_button .point:nth-of-type(18) {
   animation: dot 0.14s 4.06923s forwards;
 }
-body .containers input:checked + label .containers_button .point:nth-of-type(19) {
+body .containerr input:checked + label .containerr_button .point:nth-of-type(19) {
   animation: dot 0.14s 4.07308s forwards;
 }
-body .containers input:checked + label .containers_button .point:nth-of-type(20) {
+body .containerr input:checked + label .containerr_button .point:nth-of-type(20) {
   animation: dot 0.14s 4.07692s forwards;
 }
-body .containers input:checked + label .containers_button .point:nth-of-type(21) {
+body .containerr input:checked + label .containerr_button .point:nth-of-type(21) {
   animation: dot 0.14s 4.08077s forwards;
 }
-body .containers input:checked + label .containers_button .point:nth-of-type(22) {
+body .containerr input:checked + label .containerr_button .point:nth-of-type(22) {
   animation: dot 0.14s 4.08462s forwards;
 }
-body .containers input:checked + label .containers_button .point:nth-of-type(23) {
+body .containerr input:checked + label .containerr_button .point:nth-of-type(23) {
   animation: dot 0.14s 4.08846s forwards;
 }
-body .containers input:checked + label .containers_button .point:nth-of-type(24) {
+body .containerr input:checked + label .containerr_button .point:nth-of-type(24) {
   animation: dot 0.14s 4.09231s forwards;
 }
-body .containers input:checked + label .containers_button .point:nth-of-type(25) {
+body .containerr input:checked + label .containerr_button .point:nth-of-type(25) {
   animation: dot 0.14s 4.09615s forwards;
 }
-body .containers input:checked + label .containers_button .point:nth-of-type(26) {
+body .containerr input:checked + label .containerr_button .point:nth-of-type(26) {
   animation: dot 0.14s 4.1s forwards;
 }
-body .containers input:checked + label .containers_button .point:nth-of-type(27) {
+body .containerr input:checked + label .containerr_button .point:nth-of-type(27) {
   animation: dot 0.14s 4.10385s forwards;
 }
-body .containers input:checked + label .containers_button .point:nth-of-type(28) {
+body .containerr input:checked + label .containerr_button .point:nth-of-type(28) {
   animation: dot 0.14s 4.10769s forwards;
 }
-body .containers input:checked + label .containers_button .point:nth-of-type(29) {
+body .containerr input:checked + label .containerr_button .point:nth-of-type(29) {
   animation: dot 0.14s 4.11154s forwards;
 }
-body .containers input:checked + label .containers_button .point:nth-of-type(30) {
+body .containerr input:checked + label .containerr_button .point:nth-of-type(30) {
   animation: dot 0.14s 4.11538s forwards;
 }
-body .containers input:checked + label .containers_button .point:nth-of-type(31) {
+body .containerr input:checked + label .containerr_button .point:nth-of-type(31) {
   animation: dot 0.14s 4.11923s forwards;
 }
-body .containers input:checked + label .containers_button .point:nth-of-type(32) {
+body .containerr input:checked + label .containerr_button .point:nth-of-type(32) {
   animation: dot 0.14s 4.12308s forwards;
 }
-body .containers input:checked + label .containers_button .point:nth-of-type(33) {
+body .containerr input:checked + label .containerr_button .point:nth-of-type(33) {
   animation: dot 0.14s 4.12692s forwards;
 }
-body .containers input:checked + label .containers_button .point:nth-of-type(34) {
+body .containerr input:checked + label .containerr_button .point:nth-of-type(34) {
   animation: dot 0.14s 4.13077s forwards;
 }
-body .containers input:checked + label .containers_button .point:nth-of-type(35) {
+body .containerr input:checked + label .containerr_button .point:nth-of-type(35) {
   animation: dot 0.14s 4.13462s forwards;
 }
-body .containers input:checked + label .containers_button .point:nth-of-type(36) {
+body .containerr input:checked + label .containerr_button .point:nth-of-type(36) {
   animation: dot 0.14s 4.13846s forwards;
 }
-body .containers input:checked + label .containers_button:hover {
+body .containerr input:checked + label .containerr_button:hover {
   box-shadow: none;
 }
-body .containers input:checked + label .containers_button__bar {
+body .containerr input:checked + label .containerr_button__bar {
   animation: bar 2.6s 1.14s cubic-bezier(0.19, 1, 0.22, 1) forwards, barout 0.3s 3.2s forwards;
 }
-body .containers label {
+body .containerr label {
   cursor: pointer;
 }
-body .containers label .downloading {
+body .containerr label .downloading {
   position: absolute;
   left: 0;
   right: 0;
@@ -236,7 +245,7 @@ body .containers label .downloading {
   opacity: 0;
   font-size: 12px;
 }
-body .containers label .point {
+body .containerr label .point {
   opacity: 0;
   width: 2px;
   height: 6px;
@@ -247,115 +256,115 @@ body .containers label .point {
   left: -11px;
   top: 50px;
 }
-body .containers label .point:nth-of-type(1) {
+body .containerr label .point:nth-of-type(1) {
   transform: rotate(10deg);
 }
-body .containers label .point:nth-of-type(2) {
+body .containerr label .point:nth-of-type(2) {
   transform: rotate(20deg);
 }
-body .containers label .point:nth-of-type(3) {
+body .containerr label .point:nth-of-type(3) {
   transform: rotate(30deg);
 }
-body .containers label .point:nth-of-type(4) {
+body .containerr label .point:nth-of-type(4) {
   transform: rotate(40deg);
 }
-body .containers label .point:nth-of-type(5) {
+body .containerr label .point:nth-of-type(5) {
   transform: rotate(50deg);
 }
-body .containers label .point:nth-of-type(6) {
+body .containerr label .point:nth-of-type(6) {
   transform: rotate(60deg);
 }
-body .containers label .point:nth-of-type(7) {
+body .containerr label .point:nth-of-type(7) {
   transform: rotate(70deg);
 }
-body .containers label .point:nth-of-type(8) {
+body .containerr label .point:nth-of-type(8) {
   transform: rotate(80deg);
 }
-body .containers label .point:nth-of-type(9) {
+body .containerr label .point:nth-of-type(9) {
   transform: rotate(90deg);
 }
-body .containers label .point:nth-of-type(10) {
+body .containerr label .point:nth-of-type(10) {
   transform: rotate(100deg);
 }
-body .containers label .point:nth-of-type(11) {
+body .containerr label .point:nth-of-type(11) {
   transform: rotate(110deg);
 }
-body .containers label .point:nth-of-type(12) {
+body .containerr label .point:nth-of-type(12) {
   transform: rotate(120deg);
 }
-body .containers label .point:nth-of-type(13) {
+body .containerr label .point:nth-of-type(13) {
   transform: rotate(130deg);
 }
-body .containers label .point:nth-of-type(14) {
+body .containerr label .point:nth-of-type(14) {
   transform: rotate(140deg);
 }
-body .containers label .point:nth-of-type(15) {
+body .containerr label .point:nth-of-type(15) {
   transform: rotate(150deg);
 }
-body .containers label .point:nth-of-type(16) {
+body .containerr label .point:nth-of-type(16) {
   transform: rotate(160deg);
 }
-body .containers label .point:nth-of-type(17) {
+body .containerr label .point:nth-of-type(17) {
   transform: rotate(170deg);
 }
-body .containers label .point:nth-of-type(18) {
+body .containerr label .point:nth-of-type(18) {
   transform: rotate(180deg);
 }
-body .containers label .point:nth-of-type(19) {
+body .containerr label .point:nth-of-type(19) {
   transform: rotate(190deg);
 }
-body .containers label .point:nth-of-type(20) {
+body .containerr label .point:nth-of-type(20) {
   transform: rotate(200deg);
 }
-body .containers label .point:nth-of-type(21) {
+body .containerr label .point:nth-of-type(21) {
   transform: rotate(210deg);
 }
-body .containers label .point:nth-of-type(22) {
+body .containerr label .point:nth-of-type(22) {
   transform: rotate(220deg);
 }
-body .containers label .point:nth-of-type(23) {
+body .containerr label .point:nth-of-type(23) {
   transform: rotate(230deg);
 }
-body .containers label .point:nth-of-type(24) {
+body .containerr label .point:nth-of-type(24) {
   transform: rotate(240deg);
 }
-body .containers label .point:nth-of-type(25) {
+body .containerr label .point:nth-of-type(25) {
   transform: rotate(250deg);
 }
-body .containers label .point:nth-of-type(26) {
+body .containerr label .point:nth-of-type(26) {
   transform: rotate(260deg);
 }
-body .containers label .point:nth-of-type(27) {
+body .containerr label .point:nth-of-type(27) {
   transform: rotate(270deg);
 }
-body .containers label .point:nth-of-type(28) {
+body .containerr label .point:nth-of-type(28) {
   transform: rotate(280deg);
 }
-body .containers label .point:nth-of-type(29) {
+body .containerr label .point:nth-of-type(29) {
   transform: rotate(290deg);
 }
-body .containers label .point:nth-of-type(30) {
+body .containerr label .point:nth-of-type(30) {
   transform: rotate(300deg);
 }
-body .containers label .point:nth-of-type(31) {
+body .containerr label .point:nth-of-type(31) {
   transform: rotate(310deg);
 }
-body .containers label .point:nth-of-type(32) {
+body .containerr label .point:nth-of-type(32) {
   transform: rotate(320deg);
 }
-body .containers label .point:nth-of-type(33) {
+body .containerr label .point:nth-of-type(33) {
   transform: rotate(330deg);
 }
-body .containers label .point:nth-of-type(34) {
+body .containerr label .point:nth-of-type(34) {
   transform: rotate(340deg);
 }
-body .containers label .point:nth-of-type(35) {
+body .containerr label .point:nth-of-type(35) {
   transform: rotate(350deg);
 }
-body .containers label .point:nth-of-type(36) {
+body .containerr label .point:nth-of-type(36) {
   transform: rotate(360deg);
 }
-body .containers label .complete {
+body .containerr label .complete {
   position: absolute;
   left: 0;
   right: 0;
@@ -365,7 +374,7 @@ body .containers label .complete {
   transform: translateY(-50%) scale(0);
   font-size: 32px;
 }
-body .containers label .d_icon {
+body .containerr label .d_icon {
   position: absolute;
   left: 0;
   right: 0;
@@ -375,13 +384,13 @@ body .containers label .d_icon {
   transform: translateY(-50%) scale(0);
   font-size: 32px;
 }
-body .containers label span {
+body .containerr label span {
   opacity: 1;
   transition: all 0.18s;
   position: relative;
   top: -3px;
 }
-body .containers label span i {
+body .containerr label span i {
   font-size: 22px;
   margin-right: 6px;
   position: relative;
@@ -389,12 +398,12 @@ body .containers label span i {
   transition: all 0.2s;
   top: 3px;
 }
-body .containers label span span {
+body .containerr label span span {
   left: 0;
   top: 0px;
   transition: all 0.2s;
 }
-body .containers label span .large {
+body .containerr label span .large {
   position: absolute;
   opacity: 0;
   transition: all 0.3s 0.1s;
