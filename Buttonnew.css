@@ -77,3 +77,7 @@ p {
     background: linear-gradient(top,  #00b7ea 36%,#009ec3 100%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00b7ea', endColorstr='#009ec3',GradientType=0 ); /* IE6-9 */
 }
+
+.buttton:active .bottom { margin: -20px 0 0 10px }
+
+.buttton:active .top { margin: -70px 0 0 10px }
