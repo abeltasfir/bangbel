@@ -1,0 +1,8 @@
+pengisian iklan kosong
+
+<div class="jagoankodeads">
+<div class="jagoankode"><a href="URL_IKLAN" title="Judul_Iklan" rel="nofollow noopener" target="_blank"><img src="URL_GAMBAR_IKLAN" /></a></div>
+<div class="jagoankode"><a href="URL_IKLAN" title="Judul_Iklan" rel="nofollow noopener" target="_blank"><img src="URL_GAMBAR_IKLAN" /></a></div>
+<div class="jagoankode"><a href="URL_IKLAN" title="Judul_Iklan" rel="nofollow noopener" target="_blank"><img src="URL_GAMBAR_IKLAN" /></a></div>
+<div class="jagoankode"><a href="URL_IKLAN" title="Judul_Iklan" rel="nofollow noopener" target="_blank"><img src="URL_GAMBAR_IKLAN" /></a></div>
+</div>
