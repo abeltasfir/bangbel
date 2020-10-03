@@ -2,10 +2,11 @@
 
 .sliderqu {
   margin: 0 auto;
-  margin-top: 0px;
+  margin-top: 20px;
   position: relative;
-  width: 703px;
-  height: 363px;
+  width: 70%;
+  height: 0;
+  padding-bottom: 40%;
   user-select: none;
   background-color: #1c1c1c;
   box-shadow: 0 11px 22px rgba(0, 0, 0, 0.2), 0 7px 7px rgba(0, 0, 0, 0.24);
