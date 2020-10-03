@@ -21,8 +21,8 @@
   z-index: -1;
 }
 .sliderqu .slide_img img {
-  width: inherit;
-  height: inherit;
+    width: 75%;
+    height: initial;
 }
 .sliderqu .slide_img .prev,
 .sliderqu .slide_img .next {
