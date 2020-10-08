@@ -33,7 +33,7 @@ dl#simple-gallery dd {
   opacity: 0;
   transition: .7s opacity;
   text-align: center;
-  font-size: 1.4rem;
+  font-size: 0.8rem;
   font-style: italic;
   color: #000;
   padding-left: 0;
