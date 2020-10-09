@@ -48,7 +48,7 @@ dl#simple-gallery dd img{
   margin-bottom: 1rem;
     
 }
-.active { 
+.active {
   opacity:1!important;
   cursor: pointer;
   z-index:1!important;
