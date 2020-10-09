@@ -7,8 +7,8 @@ dl#simple-gallery {
   position: relative;
 
   font-size: 0;
-  padding: 1rem;
-  padding-bottom: 8rem;
+  padding: 0.2rem;
+  padding-bottom: 2rem;
 }
 dl#simple-gallery dt{
   width: 8.5%;
@@ -17,8 +17,8 @@ dl#simple-gallery dt{
   
 }
 dl#simple-gallery dt img { 
-  width: 100%;
-  height: auto;
+  width: auto;
+  height: 450px;
 }
 dl#simple-gallery dt:hover+dd, dl#simple-gallery dt:focus+dd { 
   opacity:1;
