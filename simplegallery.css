@@ -41,7 +41,7 @@ dl#simple-gallery dd {
   z-index: 10; 
 }
 dl#simple-gallery dd img{
-  width: 100%;
+  width: auto;
   height: 450px;
   box-shadow:0 0 8px rgba(0,0,0,0.3);
   display:block;
