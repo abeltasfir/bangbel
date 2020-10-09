@@ -18,7 +18,7 @@ dl#simple-gallery dt{
 }
 dl#simple-gallery dt img { 
   width: auto;
-  height: 450px;
+  height: 65px;
 }
 dl#simple-gallery dt:hover+dd, dl#simple-gallery dt:focus+dd { 
   opacity:1;
