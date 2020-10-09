@@ -28,7 +28,7 @@ dl#simple-gallery dt:hover+dd, dl#simple-gallery dt:focus+dd {
 dl#simple-gallery dd { 
  
   position: absolute;
-  top: 1rem;
+  top: 0rem;
   left: 12%;
   opacity: 0;
   transition: .7s opacity;
