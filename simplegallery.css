@@ -51,7 +51,7 @@ dl#simple-gallery dd {
 }
 dl#simple-gallery dd img{
   width: auto;
-  height: 550px;
+  height: 450px;
   box-shadow:0 0 8px rgba(0,0,0,0.3);
   display:block;
   margin-bottom: 1rem;
