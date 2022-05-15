@@ -1,24 +1,32 @@
 .slideshow{
   max-width:950px;
+
   
 }
 
 dl#simple-gallery { 
   position: relative;
 
-  font-size: 0;
+
+  font-size: 0rem;
   padding: 0.2rem;
   padding-bottom: 2rem;
+
 }
 dl#simple-gallery dt{
   width: 8.5%;
   min-width: 50px;
   cursor: pointer;
+padding-bottom: 10px;
+
+
   
 }
 dl#simple-gallery dt img { 
   width: auto;
   height: 65px;
+    border-radius: 2px;
+  box-shadow: 1px 1px 2px #000;
 }
 dl#simple-gallery dt:hover+dd, dl#simple-gallery dt:focus+dd { 
   opacity:1;
@@ -29,7 +37,7 @@ dl#simple-gallery dd {
  
   position: absolute;
   top: 0rem;
-  left: 12%;
+  left: 5%;
   opacity: 0;
   transition: .7s opacity;
   text-align: center;
@@ -39,14 +47,16 @@ dl#simple-gallery dd {
   padding-left: 0;
   width: 70%;
   z-index: 10; 
+
 }
 dl#simple-gallery dd img{
   width: auto;
-  height: 450px;
+  height: 550px;
   box-shadow:0 0 8px rgba(0,0,0,0.3);
   display:block;
   margin-bottom: 1rem;
-    
+    border-radius: 2px;
+  box-shadow: 1px 1px 5px #000;
 }
 .active {
   opacity:1!important;
@@ -56,4 +66,3 @@ dl#simple-gallery dd img{
 }
 .active:not(:hover){ 
 }
-
