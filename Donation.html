@@ -1,0 +1,455 @@
+<style>
+    /* Floating Icon Container */
+    .floating-donation {
+        position: fixed;
+        bottom: 80px;
+        right: 30px;
+        z-index: 9999;
+        user-select: none;
+        cursor: grab;
+    }
+    
+    .floating-donation.dragging {
+        cursor: grabbing;
+    }
+    
+    /* Main Icon */
+    .main-icon {
+        width: 70px;
+        height: 70px;
+        background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .main-icon::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    
+    .main-icon:hover::before {
+        opacity: 1;
+    }
+    
+    .main-icon:hover {
+        transform: scale(1.1);
+        box-shadow: 0 12px 35px rgba(0,0,0,0.4);
+    }
+    
+    .main-icon svg {
+        width: 40px;
+        height: 40px;
+        filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+    }
+    
+    /* Menu Items */
+    .menu-items {
+        position: absolute;
+        bottom: 80px;
+        right: 0;
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 15px;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        transform: translateY(20px);
+    }
+    
+    .menu-items.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+    
+    .menu-item {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, #4facfe, #00f2fe);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        transform: scale(0);
+        text-decoration: none;
+    }
+    
+    .menu-items.active .menu-item {
+        transform: scale(1);
+    }
+    
+    .menu-item:hover {
+        transform: scale(1.2) !important;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.35);
+    }
+    
+    .menu-item svg {
+        width: 24px;
+        height: 24px;
+        fill: white;
+    }
+    
+    /* Menu item colors */
+    .menu-item:nth-child(1) {
+        background: linear-gradient(135deg, #ff9a9e, #fecfef);
+        transition-delay: 0.1s;
+    }
+    
+    .menu-item:nth-child(2) {
+        background: linear-gradient(135deg, #a8edea, #fed6e3);
+        transition-delay: 0.2s;
+    }
+    
+    .menu-item:nth-child(3) {
+        background: linear-gradient(135deg, #d299c2, #fef9d7);
+        transition-delay: 0.3s;
+    }
+    
+    .menu-item:nth-child(4) {
+        background: linear-gradient(135deg, #89f7fe, #66a6ff);
+        transition-delay: 0.4s;
+    }
+    
+    .menu-item:nth-child(5) {
+        background: linear-gradient(135deg, #fdbb2d, #22c1c3);
+        transition-delay: 0.5s;
+    }
+    
+    /* Pulse animation */
+    @keyframes pulse {
+        0% {
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3), 0 0 0 0 rgba(255, 107, 107, 0.7);
+        }
+        70% {
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3), 0 0 0 10px rgba(255, 107, 107, 0);
+        }
+        100% {
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3), 0 0 0 0 rgba(255, 107, 107, 0);
+        }
+    }
+    
+    .main-icon.pulse {
+        animation: pulse 2s infinite;
+    }
+    
+    /* Backdrop blur when menu is open */
+    .menu-backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.1);
+        backdrop-filter: blur(2px);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        z-index: 9998;
+    }
+    
+    .menu-backdrop.active {
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    /* Tooltip */
+    .tooltip {
+        position: absolute;
+        bottom: 80px;
+        right: 0;
+        background: rgba(0,0,0,0.8);
+        color: white;
+        padding: 8px 12px;
+        border-radius: 6px;
+        font-size: 12px;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+    }
+    
+    .floating-donation:hover .tooltip {
+        opacity: 1;
+        visibility: visible;
+        bottom: 85px;
+    }
+    
+    /* Mobile responsive */
+    @media (max-width: 768px) {
+        .floating-donation {
+            bottom: 20px;
+            right: 20px;
+        }
+        
+        .main-icon {
+            width: 60px;
+            height: 60px;
+        }
+        
+        .main-icon svg {
+            width: 35px;
+            height: 35px;
+        }
+        
+        .menu-item {
+            width: 45px;
+            height: 45px;
+        }
+    }
+</style>
+
+<!-- Backdrop -->
+<div class="menu-backdrop" id="menuBackdrop"></div>
+
+<!-- Floating Donation Icon -->
+<div class="floating-donation" id="floatingDonation">
+    <div class="main-icon pulse" id="mainIcon">
+        <!-- Main donation icon SVG -->
+        <svg viewBox="0 0 335.58 335.58" xmlns="http://www.w3.org/2000/svg">
+            <path style="fill:#F3A069;" d="M167.854,152.767c-32.175,0-58.257-26.083-58.257-58.257s26.083-58.257,58.257-58.257V152.767z"></path>
+            <path style="fill:#956958;" d="M172.143,86.318c-1.726-0.714-3.136-1.349-4.289-1.923c-4.682-2.334-5.103-3.668-5.103-5.272 c0-2.39,1.886-3.905,5.102-4.164c0.326-0.026,0.666-0.04,1.019-0.04c2.807,0,5.338,0.504,7.74,1.541 c1.751,0.754,3.686,0.759,5.451,0.012c1.76-0.745,3.158-2.198,3.836-3.987l0.282-0.745c1.332-3.519-0.315-7.436-3.748-8.915 c-2.305-0.994-4.827-1.69-7.507-2.073v-2.625c0-3.867-3.146-7.014-7.013-7.014s-7.014,3.146-7.014,7.014v3.504 c-8.951,2.706-14.476,9.787-14.476,18.642c0,11.577,9.293,16.783,18.34,20.33c1.191,0.483,2.212,0.95,3.088,1.404 c4.765,2.465,5.223,4.505,5.223,6.26c0,3.133-2.494,4.663-5.221,5.163c-0.713,0.131-1.441,0.191-2.146,0.191 c-3.079,0-6.349-0.751-9.207-2.114c-1.764-0.841-3.817-0.894-5.634-0.144c-1.847,0.761-3.292,2.276-3.965,4.157l-0.278,0.775 c-1.198,3.346,0.279,7.055,3.436,8.627c2.927,1.457,6.508,2.51,10.169,3v2.973c0,3.867,3.146,7.013,7.109,7.013 c0.173,0,0.345-0.006,0.514-0.019c3.628-0.264,6.499-3.301,6.499-6.994v-3.796c9.228-2.786,15.147-10.368,15.147-19.503 C189.498,95.008,180.213,89.609,172.143,86.318z"></path>
+            <path style="fill:#7C5849;" d="M156.501,111.506c-1.764-0.841-3.817-0.894-5.634-0.144c-1.847,0.761-3.292,2.276-3.965,4.156 l-0.278,0.775c-1.198,3.346,0.279,7.055,3.436,8.627c2.927,1.457,6.508,2.51,10.169,3v2.972c0,3.867,3.146,7.013,7.109,7.013 c0.173,0,0.514-0.019,0.514-0.019l0.001-24.457c-0.713,0.131-1.441,0.191-2.145,0.191 C162.629,113.621,159.359,112.87,156.501,111.506z"></path>
+            <path style="fill:#7C5849;" d="M164.764,100.604c1.191,0.483,2.212,0.95,3.088,1.404l0.002-17.613 c-4.682-2.334-5.103-3.668-5.103-5.272c0-2.39,1.886-3.905,5.102-4.164V51.115c-3.84,0.032-6.954,3.166-6.954,7.013v3.504 c-8.951,2.706-14.476,9.787-14.476,18.642C146.424,91.851,155.717,97.056,164.764,100.604z"></path>
+            <path style="fill:#C39F73;" d="M258.111,235.578l63.542-49.535c7.812-6.221,9.732-17.304,4.467-25.789l0,0 c-6.191-9.979-19.684-12.357-28.913-5.095l-87.26,68.112"></path>
+            <path style="fill:#D9B07F;" d="M116.715,241.519l107.679-6.252c9.644-0.56,17.179-8.544,17.179-18.205l0,0 c0-10.071-8.164-18.236-18.236-18.236h-38.696c-7.585,0-15.061-1.797-21.817-5.244l-13.674-6.977 c-10.176-5.192-21.512-7.687-32.928-7.248l0,0c-15.805,0.608-30.881,6.804-42.546,17.485L0,264.304l38.579,49.842l53.634-33.54 h116.195c13.312,0,26.23-4.517,36.641-12.813l87.079-69.383c7.812-6.221,9.732-17.304,4.467-25.789l0,0 c-6.191-9.979-19.684-12.357-28.913-5.095l-64.887,51.977"></path>
+            <path style="fill:#C39F73;" d="M109.973,247.322l113.739-6.604c10.984-0.638,19.564-9.731,19.564-20.733l0,0 c0-11.47-9.298-20.768-20.768-20.768h-44.069c-3.671,0-10.844,5.886-17.878,12.655c-14.728,14.171-32.177,25.209-51.193,32.702l0,0 C107.86,245.167,108.355,247.416,109.973,247.322z"></path>
+            <path style="fill:#D9B07F;" d="M116.715,241.519l107.679-6.252c9.644-0.56,17.179-8.544,17.179-18.205l0,0 c0-10.071-8.164-18.236-18.236-18.236h-38.696c-7.585,0-15.061-1.797-21.817-5.244l-13.674-6.977 c-10.176-5.192-21.512-7.687-32.928-7.248l0,0c-15.805,0.608-30.881,6.804-42.546,17.485"></path>
+            <path style="fill:#C39F73;" d="M164.778,194.506c-0.656-0.298-1.311-0.597-1.954-0.925l-13.674-6.977 c-10.176-5.192-21.513-7.687-32.928-7.248l0,0c-15.805,0.608-30.881,6.804-42.546,17.485L0,264.304l38.579,49.842l53.634-33.54 h72.565V194.506z"></path>
+            <path style="fill:#C39F73;" d="M164.778,194.506c-0.656-0.298-1.311-0.597-1.954-0.925l-13.674-6.977 c-10.176-5.192-21.513-7.687-32.928-7.248l0,0c-15.805,0.608-30.881,6.804-42.546,17.485l43.039,44.677l48.062-2.791 L164.778,194.506L164.778,194.506z"></path>
+            <path style="fill:#AD8E67;" d="M116.716,241.518l-0.038-0.039c-2.409,1.089-4.846,2.122-7.31,3.093l0,0 c-1.508,0.594-1.013,2.843,0.605,2.749l54.59-3.17v-5.412L116.716,241.518z"></path>
+        </svg>
+    </div>
+    
+    <div class="menu-items" id="menuItems">
+        <!-- PayPal -->
+        <a href="https://paypal.me/abeltasfir" target="_blank" class="menu-item">
+            <svg viewBox="0 0 24 24">
+                <path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a.5.5 0 0 1 .49-.4h.395c.286 0 .545.215.583.495.046.34.046.688-.017 1.043-.283 1.577-.843 2.765-1.662 3.54-.74.7-1.74 1.05-2.966 1.05h-.395a.5.5 0 0 1-.49-.4l-.583-3.728a.5.5 0 0 1 .49-.6h.395c1.226 0 2.226-.35 2.966-1.05.82-.775 1.38-1.963 1.663-3.54.063-.355.063-.703.017-1.043a.586.586 0 0 0-.583-.495h-.395a.5.5 0 0 1-.49-.4l-.017-.105a.5.5 0 0 1 .49-.6h.395c.286 0 .545.215.583.495z"/>
+            </svg>
+        </a>
+        
+        <!-- Bank Transfer -->
+        <a href="https://example.com/bank-transfer" target="_blank" class="menu-item">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zM10.5 17L6 12.5l1.41-1.41L10.5 14.17l6.59-6.59L18.5 9l-8 8z"/>
+            </svg>
+        </a>
+        
+        <!-- Credit Card -->
+        <a href="https://example.com/credit-card" target="_blank" class="menu-item">
+            <svg viewBox="0 0 24 24">
+                <path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/>
+            </svg>
+        </a>
+        
+        <!-- Digital Wallet -->
+        <a href="https://example.com/digital-wallet" target="_blank" class="menu-item">
+            <svg viewBox="0 0 24 24">
+                <path d="M21 7h-2V4c0-1.1-.9-2-2-2H7c-1.1 0-2 .9-2 2v3H3c-.55 0-1 .45-1 1v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-.55-.45-1-1-1zM7 4h10v3H7V4zm10 12h-2v-2h2v2z"/>
+            </svg>
+        </a>
+        
+        <!-- Cryptocurrency -->
+        <a href="https://example.com/cryptocurrency" target="_blank" class="menu-item">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 2L2 7l10 5 10-5-10-5z M2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+        </a>
+    </div>
+    
+    <div class="tooltip">💖 Dukung Kami</div>
+</div>
+
+<script>
+    class FloatingDonation {
+        constructor() {
+            this.element = document.getElementById('floatingDonation');
+            this.mainIcon = document.getElementById('mainIcon');
+            this.menuItems = document.getElementById('menuItems');
+            this.backdrop = document.getElementById('menuBackdrop');
+            
+            this.isDragging = false;
+            this.dragStartTime = 0;
+            this.menuOpen = false;
+            this.holdTimer = null;
+            
+            this.init();
+        }
+        
+        init() {
+            // Touch events
+            this.element.addEventListener('touchstart', this.handleTouchStart.bind(this), { passive: false });
+            this.element.addEventListener('touchmove', this.handleTouchMove.bind(this), { passive: false });
+            this.element.addEventListener('touchend', this.handleTouchEnd.bind(this), { passive: false });
+            
+            // Mouse events
+            this.element.addEventListener('mousedown', this.handleMouseDown.bind(this));
+            document.addEventListener('mousemove', this.handleMouseMove.bind(this));
+            document.addEventListener('mouseup', this.handleMouseUp.bind(this));
+            
+            // Click outside to close menu
+            this.backdrop.addEventListener('click', this.closeMenu.bind(this));
+            document.addEventListener('click', (e) => {
+                if (!this.element.contains(e.target) && this.menuOpen) {
+                    this.closeMenu();
+                }
+            });
+        }
+        
+        handleTouchStart(e) {
+            this.startInteraction(e.touches[0].clientX, e.touches[0].clientY);
+            e.preventDefault();
+        }
+        
+        handleMouseDown(e) {
+            this.startInteraction(e.clientX, e.clientY);
+            e.preventDefault();
+        }
+        
+        startInteraction(x, y) {
+            this.dragStartTime = Date.now();
+            this.startX = x;
+            this.startY = y;
+            this.elementStartX = this.element.offsetLeft;
+            this.elementStartY = this.element.offsetTop;
+            
+            // Start hold timer for drag mode
+            this.holdTimer = setTimeout(() => {
+                this.isDragging = true;
+                this.element.classList.add('dragging');
+                this.mainIcon.classList.remove('pulse');
+                this.closeMenu();
+            }, 500);
+        }
+        
+        handleTouchMove(e) {
+            if (this.holdTimer || this.isDragging) {
+                this.handleMove(e.touches[0].clientX, e.touches[0].clientY);
+                e.preventDefault();
+            }
+        }
+        
+        handleMouseMove(e) {
+            if (this.holdTimer || this.isDragging) {
+                this.handleMove(e.clientX, e.clientY);
+            }
+        }
+        
+        handleMove(x, y) {
+            const deltaX = x - this.startX;
+            const deltaY = y - this.startY;
+            
+            // If movement is significant, start dragging
+            if (Math.abs(deltaX) > 5 || Math.abs(deltaY) > 5) {
+                if (this.holdTimer) {
+                    clearTimeout(this.holdTimer);
+                    this.holdTimer = null;
+                }
+                
+                if (this.isDragging) {
+                    let newX = this.elementStartX + deltaX;
+                    let newY = this.elementStartY + deltaY;
+                    
+                    // Keep within viewport bounds
+                    const maxX = window.innerWidth - this.element.offsetWidth;
+                    const maxY = window.innerHeight - this.element.offsetHeight;
+                    
+                    newX = Math.max(0, Math.min(newX, maxX));
+                    newY = Math.max(0, Math.min(newY, maxY));
+                    
+                    this.element.style.left = newX + 'px';
+                    this.element.style.top = newY + 'px';
+                    this.element.style.right = 'auto';
+                    this.element.style.bottom = 'auto';
+                }
+            }
+        }
+        
+        handleTouchEnd(e) {
+            this.endInteraction();
+            e.preventDefault();
+        }
+        
+        handleMouseUp(e) {
+            this.endInteraction();
+        }
+        
+        endInteraction() {
+            if (this.holdTimer) {
+                clearTimeout(this.holdTimer);
+                this.holdTimer = null;
+                
+                // This was a tap, not a drag
+                if (!this.isDragging) {
+                    this.toggleMenu();
+                }
+            }
+            
+            this.isDragging = false;
+            this.element.classList.remove('dragging');
+            
+            if (!this.menuOpen) {
+                this.mainIcon.classList.add('pulse');
+            }
+        }
+        
+        toggleMenu() {
+            if (this.menuOpen) {
+                this.closeMenu();
+            } else {
+                this.openMenu();
+            }
+        }
+        
+        openMenu() {
+            this.menuOpen = true;
+            this.menuItems.classList.add('active');
+            this.backdrop.classList.add('active');
+            this.mainIcon.classList.remove('pulse');
+            this.element.style.zIndex = '10000';
+        }
+        
+        closeMenu() {
+            this.menuOpen = false;
+            this.menuItems.classList.remove('active');
+            this.backdrop.classList.remove('active');
+            this.mainIcon.classList.add('pulse');
+            this.element.style.zIndex = '9999';
+        }
+    }
+    
+    // Initialize floating donation
+    document.addEventListener('DOMContentLoaded', () => {
+        new FloatingDonation();
+    });
+    
+    // Handle window resize
+    window.addEventListener('resize', () => {
+        const floating = document.getElementById('floatingDonation');
+        const rect = floating.getBoundingClientRect();
+        
+        // Ensure icon stays within viewport
+        if (rect.right > window.innerWidth) {
+            floating.style.left = (window.innerWidth - floating.offsetWidth - 20) + 'px';
+        }
+        if (rect.bottom > window.innerHeight) {
+            floating.style.top = (window.innerHeight - floating.offsetHeight - 20) + 'px';
+        }
+    });
+</script>
