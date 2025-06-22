@@ -223,8 +223,8 @@
     left: 20px;
     top: 50%;
     transform: translateY(-50%);
-    width: 4px;
-    height: 4px;
+    width: 5px;
+    height: 5px;
     border-radius: 50%;
     background-color: #a4e5f2;
     transition: all 0.3s ease;
