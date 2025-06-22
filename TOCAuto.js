@@ -1,4 +1,3 @@
-<script>
 document.addEventListener("DOMContentLoaded", function () {
   const tocContainer = document.getElementById("tocContent");
   if (!tocContainer) return;
@@ -33,4 +32,3 @@ document.addEventListener("DOMContentLoaded", function () {
 
   tocContainer.appendChild(tocList);
 });
-</script>
